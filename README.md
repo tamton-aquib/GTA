@@ -1,6 +1,9 @@
 # GTA
 Github Trending API
 
+> **Note**
+> The endpoint is at: https://gta.aquibjaved.repl.co
+
 ### Repositories
 
 > <details><summary>/repositories</summary>
@@ -75,7 +78,7 @@ docker run -p 5000:5000 gta:latest
 ```
 
 ## Todo
-- [ ] Host somewhere
+- [x] Host somewhere
 - [ ] developers endpoint
 - [ ] language endpoint
 - [ ] date endpoint
