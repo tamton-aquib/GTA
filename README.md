@@ -66,6 +66,14 @@ Github Trending API
 > ```
 > </details>
 
+## Usage
+
+### Docker
+```sh
+docker build -t gta .
+docker run -p 5000:5000 gta:latest
+```
+
 ## Todo
 - [ ] Host somewhere
 - [ ] developers endpoint
