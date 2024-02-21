@@ -1,8 +1,8 @@
 # GTA
 Github Trending API
 
-> **Note**
-> The endpoint is at: https://gta.aquibjaved.repl.co
+> ![Note]
+> The endpoint is at: https://github-trending.onrender.com
 
 ### Repositories
 
