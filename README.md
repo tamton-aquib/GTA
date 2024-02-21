@@ -1,7 +1,7 @@
 # GTA
 Github Trending API
 
-> ![Note]
+> [!Note]
 > The endpoint is at: https://github-trending.onrender.com
 
 ### Repositories
