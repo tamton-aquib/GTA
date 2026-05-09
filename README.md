@@ -86,32 +86,40 @@ Github Trending API
 ### Prerequisites
 - Install [uv](https://docs.astral.sh/uv/getting-started/installation/) (Python package manager)
 
-### Development
+### Development (dev server)
 ```sh
 uv sync
-uv run flask run --port ${PORT:-5000}
+make run
+```
+
+### Production (direct, no Docker)
+```sh
+make deploy
+# or manually:
+uv run gunicorn -w 2 -b 0.0.0.0:${PORT:-5000} --timeout 120 gta.main:app
 ```
 
 ### Testing
 ```sh
-uv run pytest
+make test
 ```
 
-### Docker
+### Docker (production)
 ```sh
 docker build -t gta .
 docker run -p 5000:5000 gta:latest
 ```
 
-### Docker Compose
+### Docker Compose (production)
 ```sh
-docker compose up -d
+make docker
 ```
 
-### Makefile
+### Makefile targets
 ```sh
 make install   # uv sync
-make run       # start dev server
+make run       # flask dev server
+make deploy    # gunicorn production server
 make test      # run tests
 make docker    # docker compose up -d --build
 ```
