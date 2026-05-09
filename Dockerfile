@@ -1,15 +1,14 @@
-FROM python:3.10.8-slim-buster
+FROM python:3.12-slim
 
-MAINTAINER Aquib Javed "aquibjavedt007@gmail.com"
-
-COPY ./requirements.txt /app/requirements.txt
+RUN pip install uv
 
 WORKDIR /app
 
-RUN pip install -r requirements.txt
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev
 
-COPY . /app
+COPY gta/ ./gta/
 
-ENV FLASK_APP gta/main.py
+EXPOSE 5000
 
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["uv", "run", "flask", "run", "--host=0.0.0.0", "--port=5000"]

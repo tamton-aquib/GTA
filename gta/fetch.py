@@ -20,7 +20,7 @@ class Fetcher:
             logger.error("Failed to fetch GitHub trending: %s", e)
             return self.results
 
-        soup = BeautifulSoup(sauce, "lxml")
+        soup = BeautifulSoup(sauce, "html.parser")
         boxes = soup.find_all("article")
         new_results = []
 

@@ -4,5 +4,9 @@ services:
   gta:
     build: .
     ports:
-      - "5000:5000"
+      - "${PORT:-5000}:5000"
+    environment:
+      - PORT=5000
+      - REFRESH_INTERVAL=${REFRESH_INTERVAL:-300}
+      - RATE_LIMIT=${RATE_LIMIT:-100 per minute}
     restart: unless-stopped

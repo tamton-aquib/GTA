@@ -72,6 +72,14 @@ def test_random_excessive_count(client):
     assert "error" in resp.get_json()
 
 
+def test_health(client):
+    resp = client.get("/health")
+    assert resp.status_code == 200
+    data = resp.get_json()
+    assert data["status"] == "ok"
+    assert isinstance(data["cached_repos"], int)
+
+
 def test_trailing_slash_redirect(client):
     resp = client.get("/repositories/")
     assert resp.status_code == 200

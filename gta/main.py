@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -6,13 +7,17 @@ from threading import Thread
 from random import choice, sample
 from time import sleep
 
+PORT = int(os.getenv("PORT", 5000))
+REFRESH_INTERVAL = int(os.getenv("REFRESH_INTERVAL", 300))
+RATE_LIMIT = os.getenv("RATE_LIMIT", "100 per minute")
+
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 limiter = Limiter(
     get_remote_address,
     app=app,
-    default_limits=["100 per minute"],
+    default_limits=[RATE_LIMIT],
     storage_uri="memory://",
 )
 
@@ -22,7 +27,7 @@ fetcher.refresh()
 
 def update_trending_list():
     while True:
-        sleep(5 * 60)
+        sleep(REFRESH_INTERVAL)
         fetcher.refresh()
 
 
@@ -35,6 +40,11 @@ def home():
         "repositories": f"{request.host_url}repositories",
         "random": f"{request.host_url}random",
     }
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok", "cached_repos": len(fetcher.results)}
 
 
 @app.get("/repositories")
