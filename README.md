@@ -2,7 +2,7 @@
 Github Trending API
 
 > [!Note]
-> The endpoint is at: https://github-trending.onrender.com
+> The endpoint is at: https://gta.tamton.com
 
 ### Repositories
 
@@ -77,8 +77,31 @@ docker build -t gta .
 docker run -p 5000:5000 gta:latest
 ```
 
+### Docker Compose
+```sh
+docker compose up -d
+```
+
+### Development
+```sh
+pip install -r requirements.txt
+flask run
+```
+
+### Testing
+```sh
+pytest
+```
+
+### Rate Limiting
+The API is rate-limited to **100 requests per minute** per client (by IP).
+
 ## Todo
 - [x] Host somewhere
+- [x] Input validation on `count` parameter
+- [x] Error handling in fetcher (keeps stale data on failure)
+- [x] Rate limiting with Flask-Limiter
+- [x] Test suite with pytest
+- [x] Docker Compose support
 - [ ] developers endpoint
-- [ ] language endpoint
 - [ ] date endpoint
