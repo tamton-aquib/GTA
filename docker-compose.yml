@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   gta:
     build: .
@@ -9,4 +7,5 @@ services:
       - PORT=5000
       - REFRESH_INTERVAL=${REFRESH_INTERVAL:-300}
       - RATE_LIMIT=${RATE_LIMIT:-100 per minute}
+      - BASE_URL=gta.tamton.dev
     restart: unless-stopped

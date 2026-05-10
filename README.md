@@ -133,6 +133,7 @@ All settings are controlled via environment variables:
 | `PORT` | `5000` | Server port |
 | `REFRESH_INTERVAL` | `300` | Seconds between GitHub trending refreshes |
 | `RATE_LIMIT` | `100 per minute` | Rate limit string (Flask-Limiter format) |
+| `BASE_URL` | `auto` | Base URL shown in `GET /` response. Set to `https://gta.tamton.dev` in production |
 
 ### Rate Limiting
 The API is rate-limited to **100 requests per minute** per client (by IP).

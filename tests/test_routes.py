@@ -4,6 +4,7 @@ def test_home(client):
     data = resp.get_json()
     assert "repositories" in data
     assert "random" in data
+    assert "health" in data
 
 
 def test_repositories(client):

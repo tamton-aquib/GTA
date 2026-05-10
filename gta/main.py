@@ -10,6 +10,7 @@ from time import sleep
 PORT = int(os.getenv("PORT", 5000))
 REFRESH_INTERVAL = int(os.getenv("REFRESH_INTERVAL", 300))
 RATE_LIMIT = os.getenv("RATE_LIMIT", "100 per minute")
+BASE_URL = os.getenv("BASE_URL", "")
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -34,11 +35,29 @@ def update_trending_list():
 Thread(target=update_trending_list, daemon=True).start()
 
 
+def _base():
+    return BASE_URL or request.host_url
+
+
 @app.get("/")
 def home():
+    base = _base()
     return {
-        "repositories": f"{request.host_url}repositories",
-        "random": f"{request.host_url}random",
+        "repositories": {
+            "url": f"{base}repositories",
+            "params": {
+                "count": "int (optional, default: all, max: 25)"
+            }
+        },
+        "random": {
+            "url": f"{base}random",
+            "params": {
+                "count": "int (optional, default: 1, max: 25)"
+            }
+        },
+        "health": {
+            "url": f"{base}health"
+        }
     }
 
 
